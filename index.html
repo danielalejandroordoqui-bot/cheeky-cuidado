@@ -35,66 +35,51 @@
 
   /* ── HEADER ── */
   .header {
-    background: linear-gradient(160deg, #C45E20 0%, #E07B39 60%, #D4713A 100%);
-    color: white;
-    padding: 52px 20px 36px;
-    text-align: center;
     position: relative;
+    min-height: 280px;
     overflow: hidden;
+    display: flex;
+    align-items: flex-end;
+    background: linear-gradient(160deg, #C45E20, #E07B39);
   }
 
-  .header::before {
-    content: '';
+  .header-bg {
     position: absolute;
-    top: -60px; right: -60px;
-    width: 200px; height: 200px;
-    border-radius: 50%;
-    background: rgba(255,255,255,0.06);
-  }
-
-  .header::after {
-    content: '';
-    position: absolute;
-    bottom: -40px; left: -40px;
-    width: 160px; height: 160px;
-    border-radius: 50%;
-    background: rgba(255,255,255,0.05);
-  }
-
-  .header-photo {
-    width: 130px;
-    height: 130px;
-    border-radius: 50%;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
     object-fit: cover;
-    border: 4px solid rgba(255,255,255,0.85);
-    margin: 0 auto 16px;
+    object-position: center 20%;
     display: block;
+  }
+
+  .header-overlay {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.05) 0%, rgba(20,6,0,0.62) 100%);
+  }
+
+  .header-content {
     position: relative;
     z-index: 1;
-    box-shadow: 0 4px 24px rgba(0,0,0,0.18);
-  }
-
-  .header-emoji {
-    font-size: 72px;
-    display: none;
-    margin-bottom: 12px;
+    width: 100%;
+    padding: 24px 20px 30px;
+    text-align: center;
+    color: white;
   }
 
   .header h1 {
-    font-size: 2.2rem;
+    font-size: 2.4rem;
     font-weight: 800;
     letter-spacing: -0.5px;
     margin-bottom: 4px;
-    position: relative;
-    z-index: 1;
+    text-shadow: 0 1px 8px rgba(0,0,0,0.4);
   }
 
   .header p {
     font-size: 0.92rem;
-    opacity: 0.85;
+    opacity: 0.88;
     font-weight: 500;
-    position: relative;
-    z-index: 1;
+    text-shadow: 0 1px 4px rgba(0,0,0,0.3);
   }
 
   /* ── NAV ── */
@@ -137,6 +122,7 @@
     margin: 32px 0 14px;
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 8px;
   }
 
@@ -149,7 +135,6 @@
     text-align: center;
     background: var(--orange);
     color: white;
-    transition: background 0.3s;
   }
 
   .today-label {
@@ -293,6 +278,7 @@
     padding-top: 10px;
     border-top: 1px solid var(--border);
     flex-wrap: wrap;
+    justify-content: center;
   }
 
   .legend-item {
@@ -377,7 +363,7 @@
   .vet-card {
     background: var(--card);
     border-radius: var(--radius);
-    padding: 14px 18px;
+    padding: 14px 16px;
     box-shadow: var(--shadow);
     margin-bottom: 10px;
     display: flex;
@@ -397,9 +383,6 @@
     font-size: 0.92rem;
     font-weight: 800;
     margin-bottom: 2px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
   }
 
   .vet-detail {
@@ -407,18 +390,26 @@
     color: var(--brown-mid);
   }
 
-  .vet-call {
-    background: var(--orange);
-    color: white;
-    padding: 9px 16px;
-    border-radius: 20px;
+  .vet-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    flex-shrink: 0;
+  }
+
+  .vet-call, .vet-wa {
+    padding: 7px 13px;
+    border-radius: 16px;
     text-decoration: none;
-    font-size: 0.82rem;
+    font-size: 0.78rem;
     font-weight: 800;
     white-space: nowrap;
-    flex-shrink: 0;
-    letter-spacing: 0.3px;
+    text-align: center;
+    letter-spacing: 0.2px;
   }
+
+  .vet-call { background: var(--orange); color: white; }
+  .vet-wa   { background: #25D366;       color: white; }
 
   .vet-card.urgencias .vet-call { background: #E74C3C; }
 
@@ -469,8 +460,7 @@
   }
 
   .photo-grid img {
-    width: 100%;
-    height: 100%;
+    width: 100%; height: 100%;
     object-fit: cover;
     display: block;
   }
@@ -484,19 +474,26 @@
     line-height: 1.8;
   }
 
-  /* ── SCROLL ANCHORS ── */
   [id] { scroll-margin-top: 56px; }
+
+  /* ── DESKTOP ── */
+  @media (min-width: 680px) {
+    .header { min-height: 340px; }
+    .header h1 { font-size: 3rem; }
+    .routine-item { padding: 22px; }
+  }
 </style>
 </head>
 <body>
 
 <!-- HEADER -->
 <div class="header">
-  <img src="img/foto-portada.jpg" alt="Cheeky" class="header-photo"
-       onerror="this.style.display='none'; document.querySelector('.header-emoji').style.display='block'">
-  <div class="header-emoji">🐱</div>
-  <h1>Cheeky</h1>
-  <p>Guía para sus cuidadores · Agosto 2026</p>
+  <img src="img/foto-portada.jpg" alt="Cheeky" class="header-bg">
+  <div class="header-overlay"></div>
+  <div class="header-content">
+    <h1>Cheeky</h1>
+    <p>Guía para sus cuidadores · Agosto 2026</p>
+  </div>
 </div>
 
 <!-- NAV -->
@@ -526,8 +523,8 @@
 
   <div class="caretaker-card patricia">
     <div class="caretaker-name">Patricia</div>
-    <div class="caretaker-dates">2 al 13 de agosto &nbsp;·&nbsp; 18 al 22 de agosto</div>
-    <div class="caretaker-key">🔑 Llave de Clari (coordinar antes del 2/8)</div>
+    <div class="caretaker-dates">1 al 13 de agosto &nbsp;·&nbsp; 18 al 23 de agosto</div>
+    <div class="caretaker-key">🔑 Llave de Clari (coordinar antes del 1/8)</div>
   </div>
 
   <div class="caretaker-card julian">
@@ -546,14 +543,14 @@
       <div class="cal-header">Vie</div>
       <div class="cal-header">Sáb</div>
 
-      <!-- Agosto 2026 empieza el sábado 1 -->
+      <!-- Agosto 2026: el 1 cae sábado -->
       <div class="cal-day empty"></div>
       <div class="cal-day empty"></div>
       <div class="cal-day empty"></div>
       <div class="cal-day empty"></div>
       <div class="cal-day empty"></div>
       <div class="cal-day empty"></div>
-      <div class="cal-day neutral" data-day="1">1</div>
+      <div class="cal-day patricia" data-day="1">1<span class="cal-dot"></span></div>
 
       <div class="cal-day patricia" data-day="2">2<span class="cal-dot"></span></div>
       <div class="cal-day patricia" data-day="3">3<span class="cal-dot"></span></div>
@@ -579,13 +576,13 @@
       <div class="cal-day patricia" data-day="21">21<span class="cal-dot"></span></div>
       <div class="cal-day patricia" data-day="22">22<span class="cal-dot"></span></div>
 
-      <div class="cal-day neutral" data-day="23">23</div>
-      <div class="cal-day neutral" data-day="24">24</div>
-      <div class="cal-day neutral" data-day="25">25</div>
-      <div class="cal-day neutral" data-day="26">26</div>
-      <div class="cal-day neutral" data-day="27">27</div>
-      <div class="cal-day neutral" data-day="28">28</div>
-      <div class="cal-day neutral" data-day="29">29</div>
+      <div class="cal-day patricia" data-day="23">23<span class="cal-dot"></span></div>
+      <div class="cal-day neutral"  data-day="24">24</div>
+      <div class="cal-day neutral"  data-day="25">25</div>
+      <div class="cal-day neutral"  data-day="26">26</div>
+      <div class="cal-day neutral"  data-day="27">27</div>
+      <div class="cal-day neutral"  data-day="28">28</div>
+      <div class="cal-day neutral"  data-day="29">29</div>
 
       <div class="cal-day neutral" data-day="30">30</div>
       <div class="cal-day neutral" data-day="31">31</div>
@@ -611,7 +608,7 @@
     <div>
       <div class="routine-title">Comida</div>
       <div class="routine-text">
-        <strong>2 scoops de alimento seco por día.</strong> El scoop está guardado dentro de la misma bolsa de alimento. No importa si lo dividís en dos veces o lo ponés todo junto — Cheeky regula sola.
+        <strong>2 scoops de alimento seco por día.</strong> El scoop está guardado dentro de la misma bolsa de alimento.
       </div>
     </div>
   </div>
@@ -621,7 +618,7 @@
     <div>
       <div class="routine-title">Agua</div>
       <div class="routine-text">
-        <strong>Fuente eléctrica siempre enchufada y en circulación.</strong> Además, dejar un recipiente extra con agua limpia en todo momento. Cheeky toma bastante agua y no confiar solo en la fuente.
+        <strong>Fuente eléctrica siempre enchufada y en circulación.</strong> Además, dejar un recipiente extra con agua limpia en todo momento.
       </div>
     </div>
   </div>
@@ -648,7 +645,7 @@
       <div class="access-badge">🧡</div>
       <div>
         <div class="access-label">Patricia</div>
-        <div class="access-detail">Necesita la llave que tiene <strong>Clari</strong>. Coordinar la entrega antes del 2 de agosto.</div>
+        <div class="access-detail">Necesita la llave que tiene <strong>Clari</strong>. Coordinar la entrega antes del 1 de agosto.</div>
       </div>
     </div>
   </div>
@@ -665,7 +662,10 @@
       <div class="vet-name">🚨 Urgencias 24 horas</div>
       <div class="vet-detail">530 N°1287 · La Plata</div>
     </div>
-    <a href="tel:+542215994682" class="vet-call">Llamar</a>
+    <div class="vet-actions">
+      <a href="https://wa.me/542215994682" class="vet-wa">WhatsApp</a>
+      <a href="tel:+542215994682" class="vet-call">Llamar</a>
+    </div>
   </div>
 
   <div class="vet-card">
@@ -673,7 +673,10 @@
       <div class="vet-name">Puerto Mascotas — Ivana</div>
       <div class="vet-detail">48 casi 19 · La Plata</div>
     </div>
-    <a href="tel:+542213143039" class="vet-call">Llamar</a>
+    <div class="vet-actions">
+      <a href="https://wa.me/542213143039" class="vet-wa">WhatsApp</a>
+      <a href="tel:+542213143039" class="vet-call">Llamar</a>
+    </div>
   </div>
 
   <div class="vet-card">
@@ -681,15 +684,21 @@
       <div class="vet-name">Barberini — a domicilio</div>
       <div class="vet-detail">Visita en el departamento</div>
     </div>
-    <a href="tel:+542216780950" class="vet-call">Llamar</a>
+    <div class="vet-actions">
+      <a href="https://wa.me/542216780950" class="vet-wa">WhatsApp</a>
+      <a href="tel:+542216780950" class="vet-call">Llamar</a>
+    </div>
   </div>
 
   <div class="vet-card">
     <div class="vet-info">
-      <div class="vet-name">Veterinaria Agustina</div>
+      <div class="vet-name">Agustina — a domicilio</div>
       <div class="vet-detail">La Plata</div>
     </div>
-    <a href="tel:+542215458888" class="vet-call">Llamar</a>
+    <div class="vet-actions">
+      <a href="https://wa.me/542215458888" class="vet-wa">WhatsApp</a>
+      <a href="tel:+542215458888" class="vet-call">Llamar</a>
+    </div>
   </div>
 
   <!-- CONTACTO -->
@@ -716,22 +725,22 @@
 
   <div class="photo-grid">
     <div class="photo-item wide">
-      <img src="img/foto1.jpg" alt="Cheeky" onerror="this.parentElement.style.background='#F0E0D0'">
+      <img src="img/foto1.jpg" alt="Cheeky" onerror="this.parentElement.style.display='none'">
     </div>
     <div class="photo-item">
-      <img src="img/foto2.jpg" alt="Cheeky" onerror="this.parentElement.style.background='#F0E0D0'">
+      <img src="img/foto2.jpg" alt="Cheeky" onerror="this.parentElement.style.display='none'">
     </div>
     <div class="photo-item">
-      <img src="img/foto3.jpg" alt="Cheeky" onerror="this.parentElement.style.background='#F0E0D0'">
+      <img src="img/foto3.jpg" alt="Cheeky" onerror="this.parentElement.style.display='none'">
     </div>
     <div class="photo-item">
-      <img src="img/foto4.jpg" alt="Cheeky" onerror="this.parentElement.style.background='#F0E0D0'">
+      <img src="img/foto4.jpg" alt="Cheeky" onerror="this.parentElement.style.display='none'">
     </div>
     <div class="photo-item">
-      <img src="img/foto5.jpg" alt="Cheeky" onerror="this.parentElement.style.background='#F0E0D0'">
+      <img src="img/foto5.jpg" alt="Cheeky" onerror="this.parentElement.style.display='none'">
     </div>
     <div class="photo-item wide">
-      <img src="img/foto6.jpg" alt="Cheeky" onerror="this.parentElement.style.background='#F0E0D0'">
+      <img src="img/foto6.jpg" alt="Cheeky" onerror="this.parentElement.style.display='none'">
     </div>
   </div>
 
@@ -749,39 +758,35 @@
                      'agosto','septiembre','octubre','noviembre','diciembre'];
 
   function getCaretaker(day) {
-    if (day >= 2  && day <= 13) return { name: 'Patricia', role: 'a cargo hoy', bg: 'var(--patricia)' };
-    if (day >= 14 && day <= 17) return { name: 'Julián',   role: 'a cargo hoy', bg: 'var(--julian)'   };
-    if (day >= 18 && day <= 22) return { name: 'Patricia', role: 'a cargo hoy', bg: 'var(--patricia)' };
+    if (day >= 1  && day <= 13) return { name: 'Patricia', role: 'a cargo hoy', bg: '#D97032' };
+    if (day >= 14 && day <= 17) return { name: 'Julián',   role: 'a cargo hoy', bg: '#4A90B8' };
+    if (day >= 18 && day <= 23) return { name: 'Patricia', role: 'a cargo hoy', bg: '#D97032' };
     return null;
   }
 
   (function () {
-    const now    = new Date();
-    const arg    = new Date(now.toLocaleString('en-US', { timeZone: 'America/Argentina/Buenos_Aires' }));
-    const month  = arg.getMonth() + 1;
-    const day    = arg.getDate();
-    const year   = arg.getFullYear();
+    const now   = new Date();
+    const arg   = new Date(now.toLocaleString('en-US', { timeZone: 'America/Argentina/Buenos_Aires' }));
+    const month = arg.getMonth() + 1;
+    const day   = arg.getDate();
+    const year  = arg.getFullYear();
 
-    const card       = document.getElementById('today-card');
-    const elDate     = document.getElementById('today-date');
-    const elName     = document.getElementById('today-name');
-    const elRole     = document.getElementById('today-role');
+    const card   = document.getElementById('today-card');
+    const elDate = document.getElementById('today-date');
+    const elName = document.getElementById('today-name');
+    const elRole = document.getElementById('today-role');
 
     elDate.textContent = `${DAYS_ES[arg.getDay()]} ${day} de ${MONTHS_ES[month - 1]}`;
 
     if (year === 2026 && month === 8) {
       const ct = getCaretaker(day);
       if (ct) {
+        card.style.background = ct.bg;
         elName.textContent = ct.name;
         elRole.textContent = ct.role;
-        // Highlight on calendar
         document.querySelectorAll('.cal-day[data-day="' + day + '"]').forEach(el => {
           el.classList.add('today-hl');
         });
-      } else if (day === 1) {
-        card.style.background = '#8B5A33';
-        elName.textContent = 'Daniel y Melisa en casa';
-        elRole.textContent = 'el viaje comienza mañana';
       } else {
         card.style.background = '#4A8A5A';
         elName.textContent = '¡Ya volvieron!';
@@ -790,7 +795,7 @@
     } else if (year < 2026 || (year === 2026 && month < 8)) {
       card.style.background = '#8B5A33';
       elName.textContent = 'El viaje aún no comenzó';
-      elRole.textContent = 'arranca el 2 de agosto de 2026';
+      elRole.textContent = 'arranca el 1 de agosto de 2026';
     } else {
       card.style.background = '#4A8A5A';
       elName.textContent = '¡Ya volvieron!';
