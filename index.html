@@ -259,6 +259,12 @@
     border: 1.5px solid var(--julian);
   }
 
+  .cal-day.sari {
+    background: var(--sari-bg);
+    color: #2E5A20;
+    border: 1.5px solid var(--sari);
+  }
+
   .cal-day.today-hl {
     box-shadow: 0 0 0 2.5px var(--orange);
     font-weight: 900;
@@ -273,6 +279,7 @@
   }
   .patricia .cal-dot { background: var(--patricia); }
   .julian   .cal-dot { background: var(--julian); }
+  .sari     .cal-dot { background: var(--sari); }
 
   .legend {
     display: flex;
@@ -526,7 +533,7 @@
 
   <div class="caretaker-card patricia">
     <div class="caretaker-name">Patricia</div>
-    <div class="caretaker-dates">1 al 13 de agosto &nbsp;·&nbsp; 18 al 23 de agosto</div>
+    <div class="caretaker-dates">1 al 13 de agosto &nbsp;·&nbsp; 19 y 21 al 23 de agosto</div>
     <div class="caretaker-key">🔑 Llave de Clari (coordinar antes del 1/8)</div>
   </div>
 
@@ -537,8 +544,8 @@
   </div>
 
   <div class="caretaker-card sari">
-    <div class="caretaker-name">Sari (respaldo)</div>
-    <div class="caretaker-dates">A coordinar · cubre los días que Patricia o Julián no puedan</div>
+    <div class="caretaker-name">Sari</div>
+    <div class="caretaker-dates">18 y 20 de agosto</div>
     <div class="caretaker-key">🔑 Copia de llave del edificio y del departamento pendiente (cerrajería)</div>
   </div>
 
@@ -579,9 +586,9 @@
 
       <div class="cal-day julian"   data-day="16">16<span class="cal-dot"></span></div>
       <div class="cal-day julian"   data-day="17">17<span class="cal-dot"></span></div>
-      <div class="cal-day patricia" data-day="18">18<span class="cal-dot"></span></div>
+      <div class="cal-day sari"     data-day="18">18<span class="cal-dot"></span></div>
       <div class="cal-day patricia" data-day="19">19<span class="cal-dot"></span></div>
-      <div class="cal-day patricia" data-day="20">20<span class="cal-dot"></span></div>
+      <div class="cal-day sari"     data-day="20">20<span class="cal-dot"></span></div>
       <div class="cal-day patricia" data-day="21">21<span class="cal-dot"></span></div>
       <div class="cal-day patricia" data-day="22">22<span class="cal-dot"></span></div>
 
@@ -605,6 +612,10 @@
       <div class="legend-item">
         <div class="legend-dot" style="background:var(--julian)"></div>
         Julián
+      </div>
+      <div class="legend-item">
+        <div class="legend-dot" style="background:var(--sari)"></div>
+        Sari
       </div>
     </div>
   </div>
@@ -660,8 +671,8 @@
     <div class="access-row">
       <div class="access-badge">💚</div>
       <div>
-        <div class="access-label">Sari (respaldo)</div>
-        <div class="access-detail">Falta sacarle copia de la llave del edificio y del departamento (cerrajería, pendiente esta semana). Se ofreció para cubrir los días que Patricia o Julián no puedan.</div>
+        <div class="access-label">Sari</div>
+        <div class="access-detail">Falta sacarle copia de la llave del edificio y del departamento (cerrajería, pendiente esta semana).</div>
       </div>
     </div>
   </div>
@@ -774,9 +785,10 @@
                      'agosto','septiembre','octubre','noviembre','diciembre'];
 
   function getCaretaker(day) {
-    if (day >= 1  && day <= 13) return { name: 'Patricia', role: 'a cargo hoy', bg: '#D97032' };
-    if (day >= 14 && day <= 17) return { name: 'Julián',   role: 'a cargo hoy', bg: '#4A90B8' };
-    if (day >= 18 && day <= 23) return { name: 'Patricia', role: 'a cargo hoy', bg: '#D97032' };
+    if (day === 18 || day === 20)  return { name: 'Sari',     role: 'a cargo hoy', bg: '#6FA85C' };
+    if (day >= 1  && day <= 13)    return { name: 'Patricia', role: 'a cargo hoy', bg: '#D97032' };
+    if (day >= 14 && day <= 17)    return { name: 'Julián',   role: 'a cargo hoy', bg: '#4A90B8' };
+    if (day >= 18 && day <= 23)    return { name: 'Patricia', role: 'a cargo hoy', bg: '#D97032' };
     return null;
   }
 
